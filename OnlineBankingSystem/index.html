@@ -1,0 +1,436 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Banking System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #243447;
+        }
+
+        header {
+            background: #102a43;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 span {
+            color: #69c3ff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            background: linear-gradient(120deg, #1769aa, #123b68);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            margin-bottom: 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #00000010;
+        }
+
+        .card h3 {
+            color: #718096;
+            margin-bottom: 12px;
+        }
+
+        .card h2 {
+            color: #1769aa;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #00000010;
+        }
+
+        .box h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            color: #718096;
+        }
+
+        .credit {
+            color: green;
+            font-weight: bold;
+        }
+
+        .debit {
+            color: red;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #123b68;
+        }
+
+        #message {
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions button {
+            background: #e8f2fb;
+            color: #14558a;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #718096;
+        }
+
+        @media(max-width: 750px) {
+            .cards, .content {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <h2>Secure<span>Bank</span></h2>
+    <p>Online Banking Portal</p>
+</header>
+
+<div class="container">
+
+    <!-- WELCOME SECTION -->
+    <div class="welcome">
+        <h1>Welcome to Online Banking</h1>
+        <p>Manage your account and transactions easily.</p>
+    </div>
+
+    <!-- ACCOUNT DASHBOARD -->
+    <div class="cards">
+
+        <div class="card">
+            <h3>Available Balance</h3>
+            <h2 id="balance">₹25,000.00</h2>
+        </div>
+
+        <div class="card">
+            <h3>Account Holder</h3>
+            <h2>Alex Johnson</h2>
+            <p>Account No: ****4821</p>
+        </div>
+
+        <div class="card">
+            <h3>Account Status</h3>
+            <h2 style="color:green">Active</h2>
+            <p>Savings Account</p>
+        </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+
+        <!-- TRANSACTION HISTORY -->
+        <div class="box">
+
+            <h2>Recent Transactions</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody id="transactions">
+
+                    <tr>
+                        <td>Salary Credit</td>
+                        <td>20 Nov 2026</td>
+                        <td class="credit">+₹35,000</td>
+                    </tr>
+
+                    <tr>
+                        <td>Electricity Bill</td>
+                        <td>18 Nov 2026</td>
+                        <td class="debit">-₹1,250</td>
+                    </tr>
+
+                    <tr>
+                        <td>Grocery Store</td>
+                        <td>16 Nov 2026</td>
+                        <td class="debit">-₹2,300</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- MONEY TRANSFER -->
+        <div class="box">
+
+            <h2>Transfer Money</h2>
+
+            <form id="transferForm">
+
+                <label>Beneficiary Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter beneficiary name"
+                    required
+                >
+
+                <label>Account Number</label>
+
+                <input
+                    type="text"
+                    id="account"
+                    placeholder="Enter account number"
+                    pattern="[0-9]{6,20}"
+                    required
+                >
+
+                <label>Amount (₹)</label>
+
+                <input
+                    type="number"
+                    id="amount"
+                    placeholder="Enter amount"
+                    min="1"
+                    step="0.01"
+                    required
+                >
+
+                <button type="submit">
+                    Transfer Funds
+                </button>
+
+            </form>
+
+            <p id="message"></p>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <!-- OTHER SERVICES -->
+    <div class="box">
+
+        <h2>Banking Services</h2>
+
+        <div class="actions">
+
+            <button onclick="showService('Account Details')">
+                Account Details
+            </button>
+
+            <button onclick="showService('Update Profile')">
+                Update Profile
+            </button>
+
+            <button onclick="showService('Bill Payments')">
+                Bill Payments
+            </button>
+
+        </div>
+
+        <p id="serviceMessage"></p>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 SecureBank | Online Banking System
+</footer>
+
+
+<!-- JAVASCRIPT -->
+<script>
+
+    let balance = 25000;
+
+    // MONEY TRANSFER FUNCTION
+
+    document.getElementById("transferForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let name = document.getElementById("name").value.trim();
+
+        let account = document.getElementById("account").value.trim();
+
+        let amount = Number(document.getElementById("amount").value);
+
+        let message = document.getElementById("message");
+
+        if (!name || !/^[0-9]{6,20}$/.test(account)) {
+
+            message.style.color = "red";
+            message.innerText = "Please enter valid beneficiary details.";
+
+            return;
+        }
+
+        if (!Number.isFinite(amount) || amount <= 0) {
+
+            message.style.color = "red";
+            message.innerText = "Please enter a valid amount.";
+
+            return;
+        }
+
+        if (amount > balance) {
+
+            message.style.color = "red";
+            message.innerText = "Insufficient balance!";
+
+            return;
+        }
+
+        // UPDATE BALANCE
+
+        balance = balance - amount;
+
+        document.getElementById("balance").innerText =
+            "₹" + balance.toLocaleString("en-IN", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+
+        // ADD TRANSACTION
+
+        let table = document.getElementById("transactions");
+
+        let row = table.insertRow(0);
+
+        row.insertCell(0).innerText = "Transfer to " + name;
+
+        row.insertCell(1).innerText =
+            new Date().toLocaleDateString("en-IN");
+
+        let cell = row.insertCell(2);
+
+        cell.innerText = "-₹" + amount.toLocaleString("en-IN");
+
+        cell.className = "debit";
+
+        // SUCCESS MESSAGE
+
+        message.style.color = "green";
+
+        message.innerText = "Money transferred successfully!";
+
+        document.getElementById("transferForm").reset();
+
+    });
+
+
+    // BANKING SERVICES
+
+    function showService(service) {
+
+        document.getElementById("serviceMessage").innerText =
+            service + " service selected successfully.";
+
+    }
+
+</script>
+
+</body>
+</html>
+```
